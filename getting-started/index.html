@@ -433,10 +433,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-close-client" class="md-nav__link">
+  <a href="#6-cluster-matching-records" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Close client
+        6. Cluster matching records
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-close-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Close client
       
     </span>
   </a>
@@ -546,6 +557,62 @@
     
   
     Common Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/clustering-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clustering and Agent Queries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment Notes
   
 
     
@@ -763,10 +830,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-close-client" class="md-nav__link">
+  <a href="#6-cluster-matching-records" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Close client
+        6. Cluster matching records
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-close-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Close client
       
     </span>
   </a>
@@ -797,13 +875,6 @@
 <span class="n">client</span> <span class="o">=</span> <span class="n">eigenlake</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
     <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://api.eigenlake.dev/&quot;</span><span class="p">,</span>
     <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;&lt;sk_sbx_your_api_key_here&gt;&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-</code></pre></div>
-<p>You can also connect to local API deployments:</p>
-<div class="highlight"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">eigenlake</span><span class="o">.</span><span class="n">connect_local</span><span class="p">(</span>
-    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;http://localhost&quot;</span><span class="p">,</span>
-    <span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span>
-    <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;&lt;your_api_key&gt;&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
 <h2 id="2-define-schema-and-index-options">2. Define schema and index options</h2>
@@ -865,7 +936,26 @@
 <div class="highlight"><pre><span></span><code><span class="n">obj</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">records</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;doc-1&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="6-close-client">6. Close client</h2>
+<h2 id="6-cluster-matching-records">6. Cluster matching records</h2>
+<div class="highlight"><pre><span></span><code><span class="n">clusters</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">cluster</span><span class="p">(</span>
+    <span class="nb">filter</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$eq&quot;</span><span class="p">:</span> <span class="s2">&quot;doc-1&quot;</span><span class="p">}},</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">algorithm</span><span class="o">=</span><span class="s2">&quot;kmeans&quot;</span><span class="p">,</span>
+    <span class="n">auto_tune</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">min_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">max_clusters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">clusters</span><span class="p">[</span><span class="s2">&quot;records_clustered&quot;</span><span class="p">])</span>
+</code></pre></div>
+<p>For natural language requests, use agent mode:</p>
+<div class="highlight"><pre><span></span><code><span class="n">answer</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+    <span class="s2">&quot;show me recent failures&quot;</span><span class="p">,</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">answer</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">])</span>
+</code></pre></div>
+<p>See <a href="../guides/clustering-agent/">Clustering and Agent Queries</a> for a full failure-analysis example.</p>
+<h2 id="7-close-client">7. Close client</h2>
 <div class="highlight"><pre><span></span><code><span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></div>
 <p>Use context manager to close automatically:</p>

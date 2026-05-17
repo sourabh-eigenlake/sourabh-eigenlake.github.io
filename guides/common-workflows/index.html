@@ -16,7 +16,7 @@
         <link rel="prev" href="../schema-builder/">
       
       
-        <link rel="next" href="../errors-and-retries/">
+        <link rel="next" href="../clustering-agent/">
       
       
         
@@ -545,6 +545,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#cluster-search-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cluster Search Results
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent Query
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#list-and-iterate" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -592,6 +614,62 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clustering-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clustering and Agent Queries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment Notes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -801,6 +879,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#cluster-search-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cluster Search Results
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agent Query
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#list-and-iterate" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -901,6 +1001,28 @@
     <span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
     <span class="nb">filter</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$eq&quot;</span><span class="p">:</span> <span class="s2">&quot;doc-1&quot;</span><span class="p">}},</span>
 <span class="p">)</span>
+</code></pre></div>
+<h2 id="cluster-search-results">Cluster Search Results</h2>
+<div class="highlight"><pre><span></span><code><span class="n">clusters</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">cluster</span><span class="p">(</span>
+    <span class="nb">filter</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$in&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;failed&quot;</span><span class="p">,</span> <span class="s2">&quot;failure&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">]}},</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">algorithm</span><span class="o">=</span><span class="s2">&quot;dbscan&quot;</span><span class="p">,</span>
+    <span class="n">dbscan_min_samples</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">distance_metric</span><span class="o">=</span><span class="s2">&quot;cosine&quot;</span><span class="p">,</span>
+    <span class="n">representatives_per_cluster</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="n">clusters</span><span class="p">[</span><span class="s2">&quot;clusters&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cluster</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">],</span> <span class="n">cluster</span><span class="p">[</span><span class="s2">&quot;summary&quot;</span><span class="p">])</span>
+</code></pre></div>
+<h2 id="agent-query">Agent Query</h2>
+<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+    <span class="s2">&quot;show me queries recent failures&quot;</span><span class="p">,</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;filter&quot;</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="list-and-iterate">List and Iterate</h2>
 <div class="highlight"><pre><span></span><code><span class="n">page</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
