@@ -444,10 +444,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-close-client" class="md-nav__link">
+  <a href="#7-rank-semantic-anomalies" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Close client
+        7. Rank semantic anomalies
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-discover-semantic-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Discover semantic topics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-close-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Close client
       
     </span>
   </a>
@@ -585,6 +607,62 @@
     
   
     Clustering and Agent Queries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/anomaly-detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vector Anomaly Detection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/topic-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vector Topic Modeling
   
 
     
@@ -841,10 +919,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-close-client" class="md-nav__link">
+  <a href="#7-rank-semantic-anomalies" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Close client
+        7. Rank semantic anomalies
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-discover-semantic-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Discover semantic topics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-close-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Close client
       
     </span>
   </a>
@@ -955,7 +1055,33 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">answer</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">])</span>
 </code></pre></div>
 <p>See <a href="../guides/clustering-agent/">Clustering and Agent Queries</a> for a full failure-analysis example.</p>
-<h2 id="7-close-client">7. Close client</h2>
+<h2 id="7-rank-semantic-anomalies">7. Rank semantic anomalies</h2>
+<div class="highlight"><pre><span></span><code><span class="n">anomalies</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">anomalies</span><span class="p">(</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+    <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">top_n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">text_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">anomalies</span><span class="p">[</span><span class="s2">&quot;anomalies&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;uuid&quot;</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;percentile&quot;</span><span class="p">])</span>
+</code></pre></div>
+<p>See <a href="../guides/anomaly-detection/">Vector Anomaly Detection</a> for score semantics
+and workload limits.</p>
+<h2 id="8-discover-semantic-topics">8. Discover semantic topics</h2>
+<div class="highlight"><pre><span></span><code><span class="n">topics</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">topics</span><span class="p">(</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+    <span class="n">text_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span>
+    <span class="n">min_topics</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">max_topics</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">topics</span><span class="p">[</span><span class="s2">&quot;topics&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">topic</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">],</span> <span class="n">topic</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">])</span>
+</code></pre></div>
+<p>See <a href="../guides/topic-modeling/">Vector Topic Modeling</a> for c-TF-IDF terms,
+metadata facets, and optional LLM labels.</p>
+<h2 id="9-close-client">9. Close client</h2>
 <div class="highlight"><pre><span></span><code><span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></div>
 <p>Use context manager to close automatically:</p>

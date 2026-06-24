@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://docs.eigenlake.dev/guides/errors-and-retries/">
+        <link rel="canonical" href="https://docs.eigenlake.dev/guides/anomaly-detection/">
       
       
-        <link rel="prev" href="../deployment/">
+        <link rel="prev" href="../clustering-agent/">
       
       
-        <link rel="next" href="../../api/client/">
+        <link rel="next" href="../topic-modeling/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Errors and Retries - EigenLake Python Client</title>
+        <title>Vector Anomaly Detection - EigenLake Python Client</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#errors-and-retries" class="md-skip">
+        <a href="#vector-anomaly-detection" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Errors and Retries
+              Vector Anomaly Detection
             
           </span>
         </div>
@@ -483,10 +483,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../anomaly-detection/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vector Anomaly Detection
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -502,6 +529,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#run-anomaly-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Run anomaly detection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#read-the-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read the result
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v1-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        V1 limits
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -567,37 +647,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Errors and Retries
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../errors-and-retries/" class="md-nav__link">
         
   
   
@@ -613,59 +666,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#error-types" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Error Types
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#retry-behavior" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Retry Behavior
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -792,10 +792,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#error-types" class="md-nav__link">
+  <a href="#run-anomaly-detection" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Error Types
+        Run anomaly detection
       
     </span>
   </a>
@@ -803,10 +803,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#retry-behavior" class="md-nav__link">
+  <a href="#read-the-result" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Retry Behavior
+        Read the result
       
     </span>
   </a>
@@ -814,10 +814,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
+  <a href="#v1-limits" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example
+        V1 limits
       
     </span>
   </a>
@@ -841,52 +841,54 @@
 
 
 
-<h1 id="errors-and-retries">Errors and Retries</h1>
-<p>The SDK raises typed exceptions from <code>eigenlake.errors</code>.</p>
-<h2 id="error-types">Error Types</h2>
-<ul>
-<li><code>AuthenticationError</code>: invalid or missing API key.</li>
-<li><code>NotFoundError</code>: namespace/index/object does not exist.</li>
-<li><code>ConflictError</code>: duplicate conflicts.</li>
-<li><code>ValidationError</code>: invalid request payload.</li>
-<li><code>APIError</code>: non-typed API errors (including 5xx after retries).</li>
-<li><code>NetworkError</code>: request/network failures.</li>
-</ul>
-<h2 id="retry-behavior">Retry Behavior</h2>
-<p><code>eigenlake.connect(..., retries=2)</code> controls retry count.</p>
-<ul>
-<li>Network request errors are retried up to <code>retries</code>.</li>
-<li>Server <code>5xx</code> responses are retried up to <code>retries</code>.</li>
-<li>Client errors (<code>4xx</code>) are not retried.</li>
-</ul>
-<h2 id="example">Example</h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">eigenlake</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">eigenlake.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticationError</span><span class="p">,</span> <span class="n">ValidationError</span><span class="p">,</span> <span class="n">APIError</span><span class="p">,</span> <span class="n">NetworkError</span>
-
-<span class="n">client</span> <span class="o">=</span> <span class="n">eigenlake</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
-    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://api.eigenlake.dev&quot;</span><span class="p">,</span>
-    <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;&lt;sk_sbx_your_api_key_here&gt;&quot;</span><span class="p">,</span>
-    <span class="n">timeout</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span>
-    <span class="n">retries</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<h1 id="vector-anomaly-detection">Vector Anomaly Detection</h1>
+<p>EigenLake can rank records that are semantically unusual relative to their
+nearest neighbors. The workload uses Local Outlier Factor (LOF) with cosine
+distance over a filtered snapshot of up to 10,000 embeddings.</p>
+<h2 id="run-anomaly-detection">Run anomaly detection</h2>
+<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">anomalies</span><span class="p">(</span>
+    <span class="nb">filter</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$eq&quot;</span><span class="p">:</span> <span class="s2">&quot;open&quot;</span><span class="p">}},</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+    <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">top_n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">text_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">],</span>
+    <span class="n">timeout</span><span class="o">=</span><span class="mf">130.0</span><span class="p">,</span>
 <span class="p">)</span>
-
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">idx</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">indexes</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;demo-namespace&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;demo-index&quot;</span><span class="p">)</span>
-    <span class="n">idx</span><span class="o">.</span><span class="n">records</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
-        <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="s2">&quot;doc-1&quot;</span><span class="p">},</span>
-        <span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">128</span><span class="p">,</span>
-    <span class="p">)</span>
-<span class="k">except</span> <span class="n">AuthenticationError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;auth error:&quot;</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
-<span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;validation error:&quot;</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
-<span class="k">except</span> <span class="n">NetworkError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;network error:&quot;</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
-<span class="k">except</span> <span class="n">APIError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;api error:&quot;</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
-<span class="k">finally</span><span class="p">:</span>
-    <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></div>
+<p><code>n_neighbors</code> controls the local semantic neighborhood. The service reduces it
+automatically when fewer records are available.
+The anomaly call uses a 130-second request timeout by default so synchronous
+Lambda execution is not constrained by the client's general 20-second default.</p>
+<h2 id="read-the-result">Read the result</h2>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">anomaly</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;anomalies&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="n">anomaly</span><span class="p">[</span><span class="s2">&quot;rank&quot;</span><span class="p">],</span>
+        <span class="n">anomaly</span><span class="p">[</span><span class="s2">&quot;uuid&quot;</span><span class="p">],</span>
+        <span class="n">anomaly</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">],</span>
+        <span class="n">anomaly</span><span class="p">[</span><span class="s2">&quot;percentile&quot;</span><span class="p">],</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">anomaly</span><span class="p">[</span><span class="s2">&quot;nearest_neighbors&quot;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  evidence:&quot;</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">[</span><span class="s2">&quot;uuid&quot;</span><span class="p">],</span> <span class="n">neighbor</span><span class="p">[</span><span class="s2">&quot;distance&quot;</span><span class="p">])</span>
+</code></pre></div>
+<p>The response includes:</p>
+<ul>
+<li><code>scores</code>: compact ranked entries for every valid vector.</li>
+<li><code>anomalies</code>: detailed records for the requested <code>top_n</code>.</li>
+<li><code>nearest_neighbors</code>: three semantically closest records supporting each detailed result.</li>
+<li><code>records_scored</code> and <code>records_skipped</code>: snapshot accounting.</li>
+<li><code>skipped_reasons</code>: invalid, missing, non-finite, zero-norm, or inconsistent vectors.</li>
+<li><code>backend</code>: <code>local</code> or <code>lambda</code>.</li>
+</ul>
+<p>An LOF score near <code>1.0</code> means the record has density similar to its neighbors.
+Higher values indicate stronger local isolation. <code>percentile</code> is a rank within
+the analyzed snapshot, not a probability or calibrated risk score.</p>
+<h2 id="v1-limits">V1 limits</h2>
+<ul>
+<li>Cosine distance only.</li>
+<li>At least three valid, non-zero vectors.</li>
+<li>At most 10,000 records in one synchronous request.</li>
+<li>Snapshot outlier detection only; no streaming model or trusted-normal novelty mode.</li>
+</ul>
 
 
 

@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://docs.eigenlake.dev/guides/deployment/">
       
       
-        <link rel="prev" href="../clustering-agent/">
+        <link rel="prev" href="../topic-modeling/">
       
       
         <link rel="next" href="../errors-and-retries/">
@@ -483,6 +483,62 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../anomaly-detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vector Anomaly Detection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topic-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vector Topic Modeling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -550,6 +606,28 @@
     <span class="md-ellipsis">
       
         Clustering Compute
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#anomaly-detection-compute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anomaly Detection Compute
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#topic-modeling-compute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Topic Modeling Compute
       
     </span>
   </a>
@@ -758,6 +836,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#anomaly-detection-compute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Anomaly Detection Compute
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#topic-modeling-compute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Topic Modeling Compute
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#lambda-isolation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -823,6 +923,49 @@ EIGENLAKE_CLUSTERING_LAMBDA_NAME=eigenlake-clustering
 <span class="p">)</span>
 </code></pre></div>
 <p>The response includes <code>backend</code> so callers can see that the work ran on Lambda.</p>
+<h2 id="anomaly-detection-compute">Anomaly Detection Compute</h2>
+<p>The <code>/search/anomalies</code> endpoint uses exact cosine LOF over up to 10,000
+embeddings. Production deployments can isolate this workload in a separate
+Lambda:</p>
+<div class="highlight"><pre><span></span><code>EIGENLAKE_ANOMALIES_BACKEND=lambda
+EIGENLAKE_ANOMALIES_LAMBDA_NAME=eigenlake-anomalies
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">anomalies</span><span class="p">(</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+    <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">top_n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">text_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Deploy it from the API repository:</p>
+<div class="highlight"><pre><span></span><code>bash<span class="w"> </span>lambda/eigenlake_anomalies/scripts/deploy_lambda.sh<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--function-name<span class="w"> </span>eigenlake-anomalies<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--role-arn<span class="w"> </span>arn:aws:iam::&lt;account-id&gt;:role/&lt;lambda-execution-role&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--region<span class="w"> </span>us-east-1
+</code></pre></div>
+<p>The deployment defaults to 4,096 MB memory and a 120-second timeout. The API
+invokes it synchronously and the response reports <code>backend="lambda"</code>.</p>
+<h2 id="topic-modeling-compute">Topic Modeling Compute</h2>
+<p>The <code>/search/topics</code> endpoint uses spherical k-means and c-TF-IDF over up to
+10,000 embeddings. Configure the production Lambda backend with:</p>
+<div class="highlight"><pre><span></span><code>EIGENLAKE_TOPICS_BACKEND=lambda
+EIGENLAKE_TOPICS_LAMBDA_NAME=eigenlake-topics
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">topics</span><span class="p">(</span>
+    <span class="n">text_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">],</span>
+    <span class="n">metadata_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">],</span>
+    <span class="n">label_mode</span><span class="o">=</span><span class="s2">&quot;keywords&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Deploy it from the API repository:</p>
+<div class="highlight"><pre><span></span><code>bash<span class="w"> </span>lambda/eigenlake_topics/scripts/deploy_lambda.sh<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--function-name<span class="w"> </span>eigenlake-topics<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--role-arn<span class="w"> </span>arn:aws:iam::&lt;account-id&gt;:role/&lt;lambda-execution-role&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--region<span class="w"> </span>us-east-1
+</code></pre></div>
+<p>The Lambda uses Python 3.12, x86-64, 4,096 MB memory, and a 120-second timeout.
+LLM labels run afterward in the API and require the Codex app-server
+configuration; Lambda always returns deterministic keyword labels.</p>
 <p>Future compute backends may include GPUs, Spark, and automatic compute selection. In that model EigenLake will choose the compute target based on request size, latency needs, and resource requirements.</p>
 <h2 id="lambda-isolation">Lambda Isolation</h2>
 <p>The clustering Lambda runs the same k-means, DBSCAN, and hyperparameter tuning implementation as the API, but outside the FastAPI process. The API invokes Lambda synchronously; AWS starts or reuses an execution environment automatically and freezes or retires it after the invoke.</p>

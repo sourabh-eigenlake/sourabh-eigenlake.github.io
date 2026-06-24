@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://docs.eigenlake.dev/guides/errors-and-retries/">
+        <link rel="canonical" href="https://docs.eigenlake.dev/guides/topic-modeling/">
       
       
-        <link rel="prev" href="../deployment/">
+        <link rel="prev" href="../anomaly-detection/">
       
       
-        <link rel="next" href="../../api/client/">
+        <link rel="next" href="../deployment/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Errors and Retries - EigenLake Python Client</title>
+        <title>Vector Topic Modeling - EigenLake Python Client</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#errors-and-retries" class="md-skip">
+        <a href="#vector-topic-modeling" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Errors and Retries
+              Vector Topic Modeling
             
           </span>
         </div>
@@ -511,10 +511,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../topic-modeling/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vector Topic Modeling
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -530,6 +557,81 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#run-topic-modeling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Run topic modeling
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#topic-terms-and-text-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Topic terms and text coverage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-llm-labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional LLM labels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metadata-facets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metadata facets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workload-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workload limits
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -567,37 +669,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Errors and Retries
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../errors-and-retries/" class="md-nav__link">
         
   
   
@@ -613,59 +688,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#error-types" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Error Types
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#retry-behavior" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Retry Behavior
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -792,10 +814,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#error-types" class="md-nav__link">
+  <a href="#run-topic-modeling" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Error Types
+        Run topic modeling
       
     </span>
   </a>
@@ -803,10 +825,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#retry-behavior" class="md-nav__link">
+  <a href="#topic-terms-and-text-coverage" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Retry Behavior
+        Topic terms and text coverage
       
     </span>
   </a>
@@ -814,10 +836,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
+  <a href="#optional-llm-labels" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example
+        Optional LLM labels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metadata-facets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metadata facets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workload-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workload limits
       
     </span>
   </a>
@@ -841,52 +885,75 @@
 
 
 
-<h1 id="errors-and-retries">Errors and Retries</h1>
-<p>The SDK raises typed exceptions from <code>eigenlake.errors</code>.</p>
-<h2 id="error-types">Error Types</h2>
-<ul>
-<li><code>AuthenticationError</code>: invalid or missing API key.</li>
-<li><code>NotFoundError</code>: namespace/index/object does not exist.</li>
-<li><code>ConflictError</code>: duplicate conflicts.</li>
-<li><code>ValidationError</code>: invalid request payload.</li>
-<li><code>APIError</code>: non-typed API errors (including 5xx after retries).</li>
-<li><code>NetworkError</code>: request/network failures.</li>
-</ul>
-<h2 id="retry-behavior">Retry Behavior</h2>
-<p><code>eigenlake.connect(..., retries=2)</code> controls retry count.</p>
-<ul>
-<li>Network request errors are retried up to <code>retries</code>.</li>
-<li>Server <code>5xx</code> responses are retried up to <code>retries</code>.</li>
-<li>Client errors (<code>4xx</code>) are not retried.</li>
-</ul>
-<h2 id="example">Example</h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">eigenlake</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">eigenlake.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthenticationError</span><span class="p">,</span> <span class="n">ValidationError</span><span class="p">,</span> <span class="n">APIError</span><span class="p">,</span> <span class="n">NetworkError</span>
-
-<span class="n">client</span> <span class="o">=</span> <span class="n">eigenlake</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
-    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://api.eigenlake.dev&quot;</span><span class="p">,</span>
-    <span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;&lt;sk_sbx_your_api_key_here&gt;&quot;</span><span class="p">,</span>
-    <span class="n">timeout</span><span class="o">=</span><span class="mf">20.0</span><span class="p">,</span>
-    <span class="n">retries</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<h1 id="vector-topic-modeling">Vector Topic Modeling</h1>
+<p>EigenLake discovers topics from existing document embeddings and grounds each
+topic in the original text stored in record properties.</p>
+<h2 id="run-topic-modeling">Run topic modeling</h2>
+<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">topics</span><span class="p">(</span>
+    <span class="nb">filter</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$eq&quot;</span><span class="p">:</span> <span class="s2">&quot;open&quot;</span><span class="p">}},</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+    <span class="n">min_topics</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">max_topics</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">text_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">],</span>
+    <span class="n">metadata_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="s2">&quot;product&quot;</span><span class="p">],</span>
+    <span class="n">top_terms</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">representatives_per_topic</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">idx</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">indexes</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;demo-namespace&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;demo-index&quot;</span><span class="p">)</span>
-    <span class="n">idx</span><span class="o">.</span><span class="n">records</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
-        <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="s2">&quot;doc-1&quot;</span><span class="p">},</span>
-        <span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">128</span><span class="p">,</span>
-    <span class="p">)</span>
-<span class="k">except</span> <span class="n">AuthenticationError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;auth error:&quot;</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
-<span class="k">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;validation error:&quot;</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
-<span class="k">except</span> <span class="n">NetworkError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;network error:&quot;</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
-<span class="k">except</span> <span class="n">APIError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;api error:&quot;</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
-<span class="k">finally</span><span class="p">:</span>
-    <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;topics&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">topic</span><span class="p">[</span><span class="s2">&quot;topic_id&quot;</span><span class="p">],</span> <span class="n">topic</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">],</span> <span class="n">topic</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">([</span><span class="n">term</span><span class="p">[</span><span class="s2">&quot;term&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">topic</span><span class="p">[</span><span class="s2">&quot;terms&quot;</span><span class="p">]])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">topic</span><span class="p">[</span><span class="s2">&quot;text_coverage&quot;</span><span class="p">])</span>
 </code></pre></div>
+<p>Topic discovery uses deterministic spherical k-means with cosine similarity.
+When <code>num_topics</code> is omitted, EigenLake evaluates the requested range on a
+deterministic sample and selects the best sampled cosine silhouette score.</p>
+<p>Each assignment contains <code>uuid</code>, <code>topic_id</code>, and cosine <code>similarity</code>.
+Similarity is not a probability.</p>
+<h2 id="topic-terms-and-text-coverage">Topic terms and text coverage</h2>
+<p>After grouping embeddings, EigenLake calculates class-based TF-IDF over the
+selected <code>text_fields</code>. This identifies words and phrases that distinguish
+each topic from the other discovered topics.</p>
+<p>Records without text still participate in semantic grouping. The response
+reports text coverage globally and per topic. A topic with no usable text gets
+a stable <code>Topic &lt;id&gt;</code> fallback label and empty terms.</p>
+<p>If <code>text_fields</code> is empty, the API infers descriptive string fields from the
+index schema. Specify the fields explicitly when stable labeling is important.</p>
+<h2 id="optional-llm-labels">Optional LLM labels</h2>
+<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">topics</span><span class="p">(</span>
+    <span class="n">text_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">],</span>
+    <span class="n">label_mode</span><span class="o">=</span><span class="s2">&quot;llm&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>LLM labeling is a presentation layer. Topic membership, centroids,
+assignments, and c-TF-IDF terms are calculated first and never changed by the
+LLM.</p>
+<p>The API sends only top terms and up to three truncated representative texts
+per topic to the configured Codex app-server. <code>keyword_label</code> remains in the
+response for auditability. If labeling is unavailable or incomplete,
+<code>label</code> falls back to <code>keyword_label</code> and <code>labeling.fallback_reason</code> explains
+why.</p>
+<p>The default is <code>label_mode="keywords"</code>, which is deterministic and does not
+call an external model.</p>
+<h2 id="metadata-facets">Metadata facets</h2>
+<p><code>metadata_fields</code> adds per-topic categorical value counts:</p>
+<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">topics</span><span class="p">(</span>
+    <span class="n">text_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">],</span>
+    <span class="n">metadata_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="s2">&quot;region&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Metadata is explanatory only. It does not affect semantic topic assignments.
+Use <code>filter</code> when metadata should restrict the analyzed snapshot.</p>
+<h2 id="workload-limits">Workload limits</h2>
+<ul>
+<li>Maximum snapshot: 10,000 embeddings</li>
+<li>Minimum: three valid, finite, non-zero embeddings</li>
+<li>Distance: cosine only</li>
+<li>One topic assignment per embedding</li>
+<li>Default timeout: 180 seconds</li>
+</ul>
+<p>Long documents that need multiple topic assignments should be chunked before
+indexing.</p>
 
 
 

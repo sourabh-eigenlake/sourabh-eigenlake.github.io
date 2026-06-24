@@ -556,6 +556,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#rank-local-semantic-outliers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rank Local Semantic Outliers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discover-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discover Topics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#agent-query" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -634,6 +656,62 @@
     
   
     Clustering and Agent Queries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../anomaly-detection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vector Anomaly Detection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../topic-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vector Topic Modeling
   
 
     
@@ -890,6 +968,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#rank-local-semantic-outliers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rank Local Semantic Outliers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discover-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discover Topics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#agent-query" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1015,6 +1115,35 @@
 <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="n">clusters</span><span class="p">[</span><span class="s2">&quot;clusters&quot;</span><span class="p">]:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">cluster</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">],</span> <span class="n">cluster</span><span class="p">[</span><span class="s2">&quot;summary&quot;</span><span class="p">])</span>
 </code></pre></div>
+<h2 id="rank-local-semantic-outliers">Rank Local Semantic Outliers</h2>
+<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">anomalies</span><span class="p">(</span>
+    <span class="nb">filter</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$eq&quot;</span><span class="p">:</span> <span class="s2">&quot;open&quot;</span><span class="p">}},</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+    <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+    <span class="n">top_n</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
+    <span class="n">text_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">anomaly</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;anomalies&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">anomaly</span><span class="p">[</span><span class="s2">&quot;uuid&quot;</span><span class="p">],</span> <span class="n">anomaly</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">],</span> <span class="n">anomaly</span><span class="p">[</span><span class="s2">&quot;percentile&quot;</span><span class="p">])</span>
+</code></pre></div>
+<p>Use the ranking to prioritize review. Percentile is relative to this filtered
+snapshot and is not a probability.</p>
+<h2 id="discover-topics">Discover Topics</h2>
+<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">topics</span><span class="p">(</span>
+    <span class="nb">filter</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$eq&quot;</span><span class="p">:</span> <span class="s2">&quot;open&quot;</span><span class="p">}},</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+    <span class="n">text_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">],</span>
+    <span class="n">metadata_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">],</span>
+    <span class="n">min_topics</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">max_topics</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;topics&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">topic</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">],</span> <span class="n">topic</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">],</span> <span class="n">topic</span><span class="p">[</span><span class="s2">&quot;text_coverage&quot;</span><span class="p">])</span>
+</code></pre></div>
+<p>Topic membership comes from embeddings. Text produces c-TF-IDF terms, while
+metadata fields add explanatory counts without changing assignments.</p>
 <h2 id="agent-query">Agent Query</h2>
 <div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
     <span class="s2">&quot;show me queries recent failures&quot;</span><span class="p">,</span>
