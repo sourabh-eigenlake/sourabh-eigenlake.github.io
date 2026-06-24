@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://docs.eigenlake.dev/guides/anomaly-detection/">
+        <link rel="canonical" href="https://docs.eigenlake.dev/guides/temporal-shift/">
       
       
-        <link rel="prev" href="../clustering-agent/">
+        <link rel="prev" href="../topic-modeling/">
       
       
-        <link rel="next" href="../topic-modeling/">
+        <link rel="next" href="../deployment/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Vector Anomaly Detection - EigenLake Python Client</title>
+        <title>Vector Temporal Shift - EigenLake Python Client</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#vector-anomaly-detection" class="md-skip">
+        <a href="#vector-temporal-shift" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Vector Anomaly Detection
+              Vector Temporal Shift
             
           </span>
         </div>
@@ -483,37 +483,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Vector Anomaly Detection
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../anomaly-detection/" class="md-nav__link">
         
   
   
@@ -529,59 +502,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#run-anomaly-detection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Run anomaly detection
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#read-the-result" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Read the result
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#v1-limits" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        V1 limits
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -619,10 +539,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../temporal-shift/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vector Temporal Shift
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -638,6 +585,70 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#run-temporal-shift" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Run temporal shift
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shift-kinds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shift kinds
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-llm-summaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional LLM summaries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workload-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workload limits
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -820,10 +831,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#run-anomaly-detection" class="md-nav__link">
+  <a href="#run-temporal-shift" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Run anomaly detection
+        Run temporal shift
       
     </span>
   </a>
@@ -831,10 +842,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#read-the-result" class="md-nav__link">
+  <a href="#shift-kinds" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Read the result
+        Shift kinds
       
     </span>
   </a>
@@ -842,10 +853,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#v1-limits" class="md-nav__link">
+  <a href="#optional-llm-summaries" class="md-nav__link">
     <span class="md-ellipsis">
       
-        V1 limits
+        Optional LLM summaries
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workload-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workload limits
       
     </span>
   </a>
@@ -869,54 +891,83 @@
 
 
 
-<h1 id="vector-anomaly-detection">Vector Anomaly Detection</h1>
-<p>EigenLake can rank records that are semantically unusual relative to their
-nearest neighbors. The workload uses Local Outlier Factor (LOF) with cosine
-distance over a filtered snapshot of up to 10,000 embeddings.</p>
-<h2 id="run-anomaly-detection">Run anomaly detection</h2>
-<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">anomalies</span><span class="p">(</span>
+<h1 id="vector-temporal-shift">Vector Temporal Shift</h1>
+<p>EigenLake compares two time windows and finds semantic shifts in the records
+inside each window. Use it for questions like “what changed this week?”,
+“which support issues are growing?”, or “what new failure modes appeared?”.</p>
+<p>Temporal shift runs topic discovery separately for the baseline and current
+windows, aligns similar topics, and ranks new, growing, shrinking, drifted, and
+restructured patterns.</p>
+<h2 id="run-temporal-shift">Run temporal shift</h2>
+<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">temporal_shift</span><span class="p">(</span>
+    <span class="n">baseline</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2026-06-01T00:00:00Z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2026-06-08T00:00:00Z&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">current</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;2026-06-08T00:00:00Z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;2026-06-15T00:00:00Z&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">timestamp_field</span><span class="o">=</span><span class="s2">&quot;event_timestamp&quot;</span><span class="p">,</span>
     <span class="nb">filter</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$eq&quot;</span><span class="p">:</span> <span class="s2">&quot;open&quot;</span><span class="p">}},</span>
-    <span class="n">limit</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
-    <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-    <span class="n">top_n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">group_by</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;product&quot;</span><span class="p">],</span>
+    <span class="n">limit_per_window</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
+    <span class="n">min_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">max_clusters</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
     <span class="n">text_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">],</span>
-    <span class="n">timeout</span><span class="o">=</span><span class="mf">130.0</span><span class="p">,</span>
+    <span class="n">metadata_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="s2">&quot;region&quot;</span><span class="p">],</span>
+    <span class="n">summary_mode</span><span class="o">=</span><span class="s2">&quot;deterministic&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">shift</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;shifts&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">shift</span><span class="p">[</span><span class="s2">&quot;shift_id&quot;</span><span class="p">],</span> <span class="n">shift</span><span class="p">[</span><span class="s2">&quot;kind&quot;</span><span class="p">],</span> <span class="n">shift</span><span class="p">[</span><span class="s2">&quot;direction&quot;</span><span class="p">],</span> <span class="n">shift</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">shift</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">shift</span><span class="p">[</span><span class="s2">&quot;explanation&quot;</span><span class="p">])</span>
+</code></pre></div>
+<p>The API uses <code>timestamp_field</code> to select records in each window. <code>filter</code>
+applies to both windows. <code>group_by</code> runs independent comparisons per metadata
+group, which is useful for products, regions, tenants, or services.</p>
+<h2 id="shift-kinds">Shift kinds</h2>
+<p>Each shift has:</p>
+<ul>
+<li><code>kind</code>: high-level category such as <code>emerging</code>, <code>growing</code>, <code>shrinking</code>,
+  <code>drift</code>, or <code>restructured</code>.</li>
+<li><code>direction</code>: <code>new</code>, <code>up</code>, <code>down</code>, <code>shifted</code>, or <code>restructured</code>.</li>
+<li><code>score</code>: ranking score for the shift.</li>
+<li><code>label</code>: human-readable phrase for the pattern.</li>
+<li><code>explanation</code>: deterministic or LLM-generated summary.</li>
+<li><code>baseline_topics</code> and <code>current_topics</code>: the topics involved in the shift.</li>
+<li><code>signals</code>: raw count, prevalence, similarity, and drift signals.</li>
+</ul>
+<p>Growing and shrinking shifts use both relative and absolute count thresholds:</p>
+<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">temporal_shift</span><span class="p">(</span>
+    <span class="n">baseline</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">},</span>
+    <span class="n">current</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">},</span>
+    <span class="n">min_relative_shift</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+    <span class="n">min_count_shift</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
-<p><code>n_neighbors</code> controls the local semantic neighborhood. The service reduces it
-automatically when fewer records are available.
-The anomaly call uses a 130-second request timeout by default so synchronous
-Lambda execution is not constrained by the client's general 20-second default.</p>
-<h2 id="read-the-result">Read the result</h2>
-<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">anomaly</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;anomalies&quot;</span><span class="p">]:</span>
-    <span class="nb">print</span><span class="p">(</span>
-        <span class="n">anomaly</span><span class="p">[</span><span class="s2">&quot;rank&quot;</span><span class="p">],</span>
-        <span class="n">anomaly</span><span class="p">[</span><span class="s2">&quot;uuid&quot;</span><span class="p">],</span>
-        <span class="n">anomaly</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">],</span>
-        <span class="n">anomaly</span><span class="p">[</span><span class="s2">&quot;percentile&quot;</span><span class="p">],</span>
-    <span class="p">)</span>
-    <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">anomaly</span><span class="p">[</span><span class="s2">&quot;nearest_neighbors&quot;</span><span class="p">]:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  evidence:&quot;</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">[</span><span class="s2">&quot;uuid&quot;</span><span class="p">],</span> <span class="n">neighbor</span><span class="p">[</span><span class="s2">&quot;distance&quot;</span><span class="p">])</span>
+<h2 id="optional-llm-summaries">Optional LLM summaries</h2>
+<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">temporal_shift</span><span class="p">(</span>
+    <span class="n">baseline</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">},</span>
+    <span class="n">current</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">},</span>
+    <span class="n">text_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">],</span>
+    <span class="n">summary_mode</span><span class="o">=</span><span class="s2">&quot;llm&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </code></pre></div>
-<p>The response includes:</p>
+<p>LLM summaries are a presentation layer. The underlying windows, topics,
+alignments, and shift scores are calculated first. If summary generation is not
+available, the API falls back to deterministic labels and explanations.</p>
+<h2 id="workload-limits">Workload limits</h2>
 <ul>
-<li><code>scores</code>: compact ranked entries for every valid vector.</li>
-<li><code>anomalies</code>: detailed records for the requested <code>top_n</code>.</li>
-<li><code>nearest_neighbors</code>: three semantically closest records supporting each detailed result.</li>
-<li><code>records_scored</code> and <code>records_skipped</code>: snapshot accounting.</li>
-<li><code>skipped_reasons</code>: invalid, missing, non-finite, zero-norm, or inconsistent vectors.</li>
-<li><code>backend</code>: <code>local</code> or <code>lambda</code>.</li>
+<li>Default <code>limit_per_window</code>: 10,000 records</li>
+<li>Default <code>top_n</code>: 50 returned shifts</li>
+<li>Minimum useful data: several valid embeddings in each window</li>
+<li>Distance: cosine similarity over existing vectors</li>
+<li>Default client timeout: 240 seconds</li>
 </ul>
-<p>An LOF score near <code>1.0</code> means the record has density similar to its neighbors.
-Higher values indicate stronger local isolation. <code>percentile</code> is a rank within
-the analyzed snapshot, not a probability or calibrated risk score.</p>
-<h2 id="v1-limits">V1 limits</h2>
-<ul>
-<li>Cosine distance only.</li>
-<li>At least three valid, non-zero vectors.</li>
-<li>At most 10,000 records in one synchronous request.</li>
-<li>Snapshot outlier detection only; no streaming model or trusted-normal novelty mode.</li>
-</ul>
+<p>For long-running production jobs, deploy the temporal shift Lambda and configure
+the API backend to invoke it.</p>
 
 
 
