@@ -589,6 +589,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#compute-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compute Agent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#list-and-iterate" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1029,6 +1040,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#compute-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compute Agent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#list-and-iterate" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1181,6 +1203,22 @@ metadata fields add explanatory counts without changing assignments.</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;filter&quot;</span><span class="p">])</span>
 </code></pre></div>
+<h2 id="compute-agent">Compute Agent</h2>
+<p>Use the compute agent for higher-level analysis tasks that may need multiple
+EigenLake tools, such as schema inspection, filtering, clustering, anomaly
+detection, topic modeling, or temporal shift.</p>
+<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">compute</span><span class="o">.</span><span class="n">agent</span><span class="p">(</span>
+    <span class="s2">&quot;Find new serious support-ticket issues this week and explain the top patterns.&quot;</span><span class="p">,</span>
+    <span class="nb">filter</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$eq&quot;</span><span class="p">:</span> <span class="s2">&quot;open&quot;</span><span class="p">}},</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+    <span class="n">text_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">],</span>
+    <span class="n">metadata_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="s2">&quot;product&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">])</span>
+</code></pre></div>
+<p>The server runs the agent with safe EigenLake tools only. It does not expose
+raw database credentials or arbitrary Python execution.</p>
 <h2 id="list-and-iterate">List and Iterate</h2>
 <div class="highlight"><pre><span></span><code><span class="n">page</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
