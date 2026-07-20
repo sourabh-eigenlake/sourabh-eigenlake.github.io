@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://docs.eigenlake.dev/guides/clustering-agent/">
       
       
-        <link rel="prev" href="../common-workflows/">
+        <link rel="prev" href="../agent-query/">
       
       
         <link rel="next" href="../anomaly-detection/">
@@ -23,15 +23,15 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Clustering and Agent Queries - EigenLake Python Client</title>
+        <title>Clustering - EigenLake Python Client</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#clustering-and-agent-queries" class="md-skip">
+        <a href="#clustering" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Clustering and Agent Queries
+              Clustering
             
           </span>
         </div>
@@ -455,6 +455,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../agent-query/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -474,7 +502,7 @@
   <span class="md-ellipsis">
     
   
-    Clustering and Agent Queries
+    Clustering
   
 
     
@@ -492,7 +520,7 @@
   <span class="md-ellipsis">
     
   
-    Clustering and Agent Queries
+    Clustering
   
 
     
@@ -540,10 +568,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#agent-mode" class="md-nav__link">
+  <a href="#agent-query" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Agent Mode
+        Agent Query
       
     </span>
   </a>
@@ -864,10 +892,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#agent-mode" class="md-nav__link">
+  <a href="#agent-query" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Agent Mode
+        Agent Query
       
     </span>
   </a>
@@ -913,13 +941,13 @@
 
 
 
-<h1 id="clustering-and-agent-queries">Clustering and Agent Queries</h1>
+<h1 id="clustering">Clustering</h1>
 <p>EigenLake can group matching records into clusters directly from an index. This is useful for operational questions such as:</p>
 <div class="highlight"><pre><span></span><code>show me recent battery failures
 </code></pre></div>
-<p>The low-level API is explicit: you provide filters, limits, and clustering options. Agent mode sits one level above that: it inspects the natural language query, builds schema-aware filters for common cases such as recent failures, infers useful summary text fields, and decides whether to run clustering or return filtered records.</p>
+<p>The low-level API is explicit: you provide filters, limits, and clustering options. For natural-language analysis with tool selection, use the separate <a href="../agent-query/">Agent Query</a> guide.</p>
 <h2 id="index-schema">Index Schema</h2>
-<p>Agent mode can only infer filters for fields that exist in the index schema. For an automotive failure analysis demo, define filterable fields such as <code>system</code>, <code>status</code>, and <code>created_at</code>, plus descriptive string fields for summaries:</p>
+<p>For an automotive failure analysis demo, define filterable fields such as <code>system</code>, <code>status</code>, and <code>created_at</code>, plus descriptive string fields for summaries:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">eigenlake</span><span class="w"> </span><span class="kn">import</span> <span class="n">schema</span> <span class="k">as</span> <span class="n">s</span>
 
 <span class="n">schema</span><span class="p">,</span> <span class="n">index_options</span> <span class="o">=</span> <span class="p">(</span>
@@ -989,44 +1017,8 @@
 <span class="p">)</span>
 </code></pre></div>
 <p>For k-means, <code>auto_tune=True</code> evaluates cluster counts in <code>[min_clusters, max_clusters]</code> and picks the best silhouette score. For DBSCAN, omitting <code>dbscan_eps</code> evaluates candidate radius values from nearest-neighbor distance quantiles.</p>
-<h2 id="agent-mode">Agent Mode</h2>
-<p>Use <code>idx.agent.query(...)</code> when the caller gives a natural language request and you want EigenLake to choose the action.</p>
-<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;show me recent battery failures&quot;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;filter&quot;</span><span class="p">])</span>
-
-<span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;clusters&quot;</span><span class="p">]:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">cluster</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">],</span> <span class="n">cluster</span><span class="p">[</span><span class="s2">&quot;summary&quot;</span><span class="p">])</span>
-</code></pre></div>
-<p>Agent mode can also request a clustering algorithm and tuning:</p>
-<div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
-    <span class="s2">&quot;show me recent battery failures&quot;</span><span class="p">,</span>
-    <span class="n">algorithm</span><span class="o">=</span><span class="s2">&quot;dbscan&quot;</span><span class="p">,</span>
-    <span class="n">dbscan_min_samples</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-<span class="p">)</span>
-</code></pre></div>
-<p>For this schema, the agent infers a filter similar to:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$in&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;failure&quot;</span><span class="p">]},</span>
-    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$gte&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;recent-start-iso8601&gt;&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;system&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$eq&quot;</span><span class="p">:</span> <span class="s2">&quot;battery&quot;</span><span class="p">},</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>It also infers summary fields such as <code>fault_code</code>, <code>symptom</code>, and <code>repair_note</code>.</p>
-<p>In <code>mode="auto"</code>, the agent currently uses simple, deterministic query hints. Queries containing clustering or failure-analysis language are routed to clustering. Other queries are routed to filtered record retrieval.</p>
-<p>You can force behavior:</p>
-<div class="highlight"><pre><span></span><code><span class="n">idx</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;recent failures&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;cluster&quot;</span><span class="p">)</span>
-<span class="n">idx</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;recent failures&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;filter&quot;</span><span class="p">)</span>
-</code></pre></div>
-<p>Advanced overrides are still available when a schema uses unusual field names:</p>
-<div class="highlight"><pre><span></span><code><span class="n">idx</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
-    <span class="s2">&quot;show me recent failures&quot;</span><span class="p">,</span>
-    <span class="n">failure_field</span><span class="o">=</span><span class="s2">&quot;outcome&quot;</span><span class="p">,</span>
-    <span class="n">recent_days</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
-    <span class="n">text_fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="s2">&quot;resolution&quot;</span><span class="p">],</span>
-<span class="p">)</span>
-</code></pre></div>
+<h2 id="agent-query">Agent Query</h2>
+<p>For natural-language clustering requests, use <a href="../agent-query/">Agent Query</a>.</p>
 <h2 id="status">Status</h2>
 <p>Clustering is synchronous today. The API returns only after Lambda clustering completes.</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">clustering_status</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
@@ -1045,7 +1037,7 @@
 <p>See the support-ticket clustering notebook in the examples repository:</p>
 <div class="highlight"><pre><span></span><code>https://github.com/EigenLake-Org/eigenlake-clustering-demos/blob/main/notebooks/query_failures_clustering_demo.ipynb
 </code></pre></div>
-<p>The notebook indexes the Kaggle customer-support ticket dataset with Gemini embeddings, then runs both low-level clustering and agent clustering. The core clustering cells look like this after records are inserted:</p>
+<p>The notebook indexes the Kaggle customer-support ticket dataset with Gemini embeddings, then runs both low-level clustering and agent-query clustering. The core clustering cells look like this after records are inserted:</p>
 <div class="highlight"><pre><span></span><code><span class="n">critical_technical_filter</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$eq&quot;</span><span class="p">:</span> <span class="s2">&quot;Technical issue&quot;</span><span class="p">},</span>
     <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$eq&quot;</span><span class="p">:</span> <span class="s2">&quot;Critical&quot;</span><span class="p">},</span>
@@ -1068,17 +1060,15 @@
 <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="n">kmeans_clusters</span><span class="p">[</span><span class="s2">&quot;clusters&quot;</span><span class="p">]:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">cluster</span><span class="p">[</span><span class="s2">&quot;cluster_id&quot;</span><span class="p">],</span> <span class="n">cluster</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">],</span> <span class="n">cluster</span><span class="p">[</span><span class="s2">&quot;summary&quot;</span><span class="p">])</span>
 </code></pre></div>
-<p>Agent mode can run the same analysis from a natural-language request:</p>
+<p>The agent query can run the same analysis from a natural-language request:</p>
 <div class="highlight"><pre><span></span><code><span class="n">agent_result</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
-    <span class="s2">&quot;cluster critical technical issue tickets&quot;</span><span class="p">,</span>
-    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;cluster&quot;</span><span class="p">,</span>
-    <span class="n">algorithm</span><span class="o">=</span><span class="s2">&quot;dbscan&quot;</span><span class="p">,</span>
-    <span class="n">dbscan_min_samples</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="s2">&quot;Find clusters of critical technical issue support tickets and show the main patterns.&quot;</span><span class="p">,</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+    <span class="n">allowed_tools</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;get_schema&quot;</span><span class="p">,</span> <span class="s2">&quot;cluster&quot;</span><span class="p">,</span> <span class="s2">&quot;filter_records&quot;</span><span class="p">],</span>
 <span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">agent_result</span><span class="p">[</span><span class="s2">&quot;backend&quot;</span><span class="p">])</span>       <span class="c1"># lambda</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">agent_result</span><span class="p">[</span><span class="s2">&quot;noise_count&quot;</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">([</span><span class="n">cluster</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="n">agent_result</span><span class="p">[</span><span class="s2">&quot;clusters&quot;</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">agent_result</span><span class="p">[</span><span class="s2">&quot;backend&quot;</span><span class="p">])</span>       <span class="c1"># codex</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">agent_result</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">])</span>
 </code></pre></div>
 
 
@@ -1132,7 +1122,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

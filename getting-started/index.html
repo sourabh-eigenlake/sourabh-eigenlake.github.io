@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -599,6 +599,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../guides/agent-query/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent Query
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../guides/clustering-agent/" class="md-nav__link">
         
   
@@ -606,7 +634,7 @@
   <span class="md-ellipsis">
     
   
-    Clustering and Agent Queries
+    Clustering
   
 
     
@@ -1075,14 +1103,13 @@
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">clusters</span><span class="p">[</span><span class="s2">&quot;records_clustered&quot;</span><span class="p">])</span>
 </code></pre></div>
-<p>For natural language requests, use agent mode:</p>
+<p>For natural language requests, use the agent query:</p>
 <div class="highlight"><pre><span></span><code><span class="n">answer</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
     <span class="s2">&quot;show me recent failures&quot;</span><span class="p">,</span>
-    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">answer</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">answer</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">])</span>
 </code></pre></div>
-<p>See <a href="../guides/clustering-agent/">Clustering and Agent Queries</a> for a full failure-analysis example.</p>
+<p>See <a href="../guides/agent-query/">Agent Query</a> for natural-language analysis and <a href="../guides/clustering-agent/">Clustering</a> for low-level clustering.</p>
 <h2 id="7-rank-semantic-anomalies">7. Rank semantic anomalies</h2>
 <div class="highlight"><pre><span></span><code><span class="n">anomalies</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">search</span><span class="o">.</span><span class="n">anomalies</span><span class="p">(</span>
     <span class="n">limit</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span>
@@ -1168,7 +1195,7 @@ metadata facets, and optional LLM labels.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
